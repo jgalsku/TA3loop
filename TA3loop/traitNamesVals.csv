@@ -1,0 +1,122 @@
+﻿TraitDBName,TraitText,val_0,val_1,val_2,val_3,num,cols
+parietal_depressionL,Parietal depression (left),abs,pres,,,1,4
+parietal_depressionR,Parietal depression (right),abs,pres,,,2,4
+spheno_occipital,Spheno-occipital synchondrosis,open,closed,,,3,4
+occipital_condyleL,Occipital condyle lipping (left),abs,>50%,>75%,,4,5
+occipital_condyleR,Occipital condyle lipping (right),abs,>50%,>75%,,5,5
+C1_lipping,C1 lipping,abs,>50%,,,6,4
+C1_eburnation,C1 eburnation ,abs,pres,,,7,4
+L1_spinous_process,L1 spinous process flattening,rnd,flat,ossified,,8,5
+L1_sup_epiph,L1 superior epiphyseal ring fusion,NF,PF,RL,FF,9,6
+L1_sup_surf,L1 superior surface morphology,GF,flat,porous,,10,5
+L1_inf_epiph,L1 inferior epiphyseal ring fusion,NF,PF,RL,FF,11,6
+L1_inf_surf,L1 inferior surface morphology,GF,flat,porous,,12,5
+L5_sup_epiph,L5 superior epiphyseal ring fusion,NF,PF,RL,FF,13,6
+L5_sup_surf,L5 superior surface morphology,GF,flat,porous,,14,5
+L5_inf_epiph,L5 inferior epiphyseal ring fusion,NF,PF,RL,FF,15,6
+L5_inf_surf,L5 inferior surface morphology,GF,flat,porous,,16,5
+L5_sup_margin,L5 superior margin shape,rnd,shp,lip(any),,17,5
+L5_inf_margin,L5 inferior margin shape,rnd,shp,lip(any),,18,5
+S1_margin,S1 margin shape,rnd,shp lipped,,,19,4
+S12_fusion,S1-S2 fusion,>1cm,<1cm,closed,,20,5
+sacral_elbow,"Sacral ""Elbow""",abs,pres,,,21,4
+cerv_lipping,Cervical vertebral lipping,abs,>3mm,,,22,4
+cerv_candlewax,Cervical candle wax,abs,pres,,,23,4
+thoracic_lipping,Thoracic vertebral lipping,abs,>5mm,,,24,4
+thoracic_candlewax,Thoracic candle wax,abs,pres,,,25,4
+lumbar_lipping,Lumbar Vertebral lipping,abs,>5mm,,,26,4
+lumbar_candlewax,Lumbar candle wax ,abs,pres,,,27,4
+DISH_C,Cervical DISH,abs,>4verts,,,28,4
+DISH_L,Thoracic DISH,abs,>4verts,,,29,4
+DISH_T,Lumbar DISH,abs,>4verts,,,30,4
+R1_FusionL,Rib 1 fusion (left),abs,fused,,,31,4
+R1_FusionR,Rib 1 fusion (right),abs,fused,,,32,4
+sternum_dorsal_ridge,Sternum central dorsal ridge,abs,pres,,,33,4
+R2_rim_profile,Rib 2 sternal rim end profiles,reg,irreg,,,34,4
+R310_rim_profile,Rib 3-10 sternal rim end profiles,reg,irreg,,,35,4
+R2_ossification,Rib 2 rim profile,abs,cone,claw,both,36,6
+R310_ossification,Rib 3-10 rim profile,abs,cone,claw,both,37,6
+R2_shingle,Rib 2 shingle,norm,shingle,,,38,4
+R310_shingle,Ribs 3-10 shingle,norm,shingle,,,39,4
+clav_med_epiphL,Clavicle medial epiphysis fusion (left),NF,PF,RL,FF,40,6
+clav_med_epiphR,Clavicle medial epiphysis fusion (right),NF,PF,RL,FF,41,6
+clav_med_gravelL,Clavicle medial epiphysis gravel (left),abs,pres,,,42,4
+clav_med_gravelR,Clavicle medial epiphysis gravel (right),abs,pres,,,43,4
+clav_med_macroL,Clavicle medial epiphysis macroporosity (left),abs,>3,many,,44,5
+clav_med_macroR,Clavicle medial epiphysis macroporosity (right),abs,>3,many,,45,5
+clav_lat_macroL,Clavicle lateral macroporosity (left),abs,>3,,,46,4
+clav_lat_macroR,Clavicle lateral macroporosity (right),abs,>3,,,47,4
+glenoid_fossaL,Scapula glenoid fossa raised border (original definition) (left),,,,,48,4
+glenoid_fossaR,Scapula glenoid fossa raised border (original definition) (right),,,,,49,4
+glenoid_lippingL,Scapula glenoid fossa elevated sharp and lipped (left),abs,<1/2,>1/2,,50,5
+glenoid_lippingR,Scapula glenoid fossa elevated sharp and lipped (right),abs,<1/2,>1/2,,51,5
+Hum_LW,Humerus light weight,norm,light,,,52,4
+lesser_tubercle_bumpsL,Humerus lesser tubercle anterior surface bumps (left),abs,>1/3,,,53,4
+lesser_tubercle_bumpsR,Humerus lesser tubercle anterior surface bumps (right),abs,>1/3,,,54,4
+lesser_tubercle_marginL,Humerus lesser tubercle margin shape (left),rnd,raised,lip,,55,5
+lesser_tubercle_marginR,Humerus lesser tubercle margin shape (right),rnd,raised,lip,,56,5
+humerus_greater_tubercleL,Humerus greater tubercle pits (left),abs,pres,,,57,4
+humerus_greater_tubercleR,Humerus greater tubercle pits (right),abs,pres,,,58,4
+med_epicondyleL,Humerus medial epicondyle texture (left),smth,rough,,,59,4
+med_epicondyleR,Humerus medial epicondyle texture (right),smth,rough,,,60,4
+lat_epicondyleL,Humerus lateral epicondyle texture (left),smth,rough,,,61,4
+lat_epicondyleR,Humerus lateral epicondyle texture (right),smth,rough,,,62,4
+radius_tuberosity_ridgeL,Radius tuberosity medial crest (left),abs,>1mm,,,63,4
+radius_tuberosity_ridgeR,Radius tuberosity medial crest (right),abs,>1mm,,,64,4
+ulna_exostosesL,Ulna olecranon spur (left),abs,>2mm,,,65,4
+ulna_exostosesR,Ulna olecranon spur (right),abs,>2mm,,,66,4
+trapezium_lippingL,Trapezium lipping (left),abs,>2mm,,,67,4
+trapezium_lippingR,Trapezium lipping (right),abs,>2mm,,,68,4
+fovea_marginL,Femoral fovea margin lipping (left),abs,>10mm,,,69,4
+fovea_marginR,Femoral fovea margin lipping (right),abs,>10mm,,,70,4
+fem_head_surfL,Femoral head surface extra bone (left),sm,>5mm,>10mm,,71,5
+fem_head_surfR,Femoral head surface extra bone (right),sm,>5mm,>10mm,,72,5
+troch_lat_surfL,Femur greater trochanter roughening (left),abs,tri,rec,OH,73,6
+troch_lat_surfR,Femur greater trochanter roughening (right),abs,tri,rec,OH,74,6
+troch_fossa_exostL,Femoral trochanteric fossa exostoses (left),abs,pres,,,75,4
+troch_fossa_exostR,Femoral trochanteric fossa exostoses (right),abs,pres,,,76,4
+troch_med_surf_exostL,Femoral trochanteric medial surface exostoses (left),abs,pres,,,77,4
+troch_med_surf_exostR,Femoral trochanteric medial surface exostoses (right),abs,pres,,,78,4
+Tib_LW,Tibia light weight,norm,light,,,79,4
+fibula_mercury_wingsL,Fibual wings (left),abs,pres,,,80,4
+fibula_mercury_wingsR,Fibual wings (right),abs,pres,,,81,4
+Calc_LW,Calcaneus light weight,norm,light,,,82,4
+Inno_LW,Innominate light weight,norm,light,,,83,4
+SI_fusionL,Sacroiliac joint fusion (left),abs,fused,SA,,84,5
+SI_fusionR,Sacroiliac joint fusion (right),abs,fused,SA,,85,5
+iliac_crest_fusionL,Iliac crest fusion (left),NF,PF,RL,FF,86,6
+iliac_crest_fusionR,Iliac crest fusion (right),NF,PF,RL,FF,87,6
+ilium_tuberculumL,Iliac crest tuberculum ossification (left),abs,ossif,db_oss,,88,5
+ilium_tuberculumR,Iliac crest tuberculum ossification (right),abs,ossif,db_oss,,89,5
+ant_inf_spine_exosL,AIIS exostoses  (left),abs,>75%,,,90,4
+ant_inf_spine_exosR,AIIS exostoses (right),abs,>75%,,,91,4
+acet_post_marginL,Acetabulum posterior margin lipping (left),abs,>10mm,,,92,4
+acet_post_marginR,Acetabulum posterior margin lipping (right),abs,>10mm,,,93,4
+acet_post_surfL,Acetabulum posterior articular surface roughening (left),smth,rough,,,94,4
+acet_post_surfR,Acetabulum posterior articular surface roughening (right),smth,rough,,,95,4
+acet_end_lippingL,Acetabulum inferior joint lipping (left),abs,>3mm,,,96,4
+acet_end_lippingR,Acetabulum inferior joint lipping (right),abs,>3mm,,,97,4
+ischium_tub_margin_spurL,Ischial tuberosity superior margin spur (left),abs,>3mm,,,98,4
+ischium_tub_margin_spurR,Ischial tuberosity superior margin spur (right),abs,>3mm,,,99,4
+Ischium_medial_spurL,Ischial tuberosity medial spur (left),abs,>10mm,,,100,4
+Ischium_medial_spurR,Ischial tuberosity medial spur (right),abs,>10mm,,,101,4
+ischium_tub_bumpsL,Ischial tuberosity bumps (left),abs,<50%,>50%,,102,5
+ischium_tub_bumpsR,Ischial tuberosity bumps (right),abs,<50%,>50%,,103,5
+inferior_surf_porosityL,Inferior surface porosity (left),abs,porosity,,,104,4
+inferior_surf_porosityR,Inferior surface porosity (right),abs,porosity,,,105,4
+sup_post_iliac_exosL,Superior posterior iliac exostoses (left),smth,exost,,,106,4
+sup_post_iliac_exosR,Superior posterior iliac exostoses (right),smth,exost,,,107,4
+inf_post_iliac_exosL,Inferior posterior iliac exostoses (left),smth,exost,,,108,4
+inf_post_iliac_exosR,Inferior posterior iliac exostoses (right),smth,exost,,,109,4
+post_exost_completeL,Posterior exostoses (left),smth,disc,cont,,110,5
+post_exost_completeR,Posterior exostoses (right),smth,disc,cont,,111,5
+pubic_collarL,Pubic symphyseal collar (left),abs,collar,,,112,4
+pubic_collarR,Pubic symphyseal collar (right),abs,collar,,,113,4
+symph_reliefL,Symphyseal relief (left),billow,resid,flat,,114,5
+symph_reliefR,Symphyseal relief (right),billow,resid,flat,,115,5
+sup_apexL,Superior protuberance (left),serrated,knob,flat,,116,5
+sup_apexR,Superior protuberance (right),serrated,knob,flat,,117,5
+ventral_marginL,Ventral symphyseal margin (left),ser/bev,rampart,rim,BD,118,6
+ventral_marginR,Ventral symphyseal margin (right),ser/bev,rampart,rim,BD,119,6
+dorsal_marginL,Dorsal symphyseal margin (left),serrated,flat,rim,BD,120,6
+dorsal_marginR,Dorsal symphyseal margin (right),serrated,flat,rim,BD,121,6
