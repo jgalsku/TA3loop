@@ -17,7 +17,7 @@ L5_inf_epiph,L5 inferior epiphyseal ring fusion,NF,PF,RL,FF,15,6
 L5_inf_surf,L5 inferior surface morphology,GF,flat,porous,,16,5
 L5_sup_margin,L5 superior margin shape,rnd,shp,lip(any),,17,5
 L5_inf_margin,L5 inferior margin shape,rnd,shp,lip(any),,18,5
-S1_margin,S1 margin shape,rnd,shp lipped,,,19,4
+S1_margin,S1 margin shape,rnd,shp ,lipped,,19,5
 S12_fusion,S1-S2 fusion,>1cm,<1cm,closed,,20,5
 sacral_elbow,"Sacral ""Elbow""",abs,pres,,,21,4
 cerv_lipping,Cervical vertebral lipping,abs,>3mm,,,22,4

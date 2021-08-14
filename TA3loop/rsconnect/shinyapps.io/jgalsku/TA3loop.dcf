@@ -5,9 +5,9 @@ account: jgalsku
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 4467260
-bundleId: 4899530
+bundleId: 4924141
 url: https://jgalsku.shinyapps.io/TA3loop/
-when: 1628378295.63998
-lastSyncTime: 1628378295.63998
+when: 1628984973.26711
+lastSyncTime: 1628984973.26711
 asMultiple: FALSE
 asStatic: FALSE
