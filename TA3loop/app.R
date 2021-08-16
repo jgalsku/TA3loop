@@ -16,17 +16,15 @@ library(tidyverse)
 # load trait labeling data
 traitNamesVals <- read.csv("traitNamesVals.csv", header = T)
 names(traitNamesVals) <- c("TraitDBName", "TraitText", "0", "1", "2", "3", "num", "cols")
-# pkgload::load_all(path= "randomGLM_1.02-1.tar.gz")
 
-# pkgFile <- "randomGLM_1.00-1.tar.gz"
-# install.packages(pkgs=pkgFile, type="source", repos=NULL)
-# unlink(pkgFile)
+# setwd("C:/Users/yo/Dropbox/shiny/TA3loop/TA3loop")
 
-# # load reference data
-# scripts_dir <- 'C:/Users/yo/Dropbox/shiny/TA3loop/TA3loop'; # trim(args[2])  # directory where R related files will be
-# 
-# rda_fileB <- file.path(scripts_dir, "TA3BUM.Rda")
-# rda_fileO <- file.path(scripts_dir, "TA3OUM.Rda")
+
+
+example_input <- matrix(NA, ncol=126, nrow=1)
+varnames <- c("ID_catkey", "indDegInput", "recorderInput", "obsDateInput", "noteInput", traitNamesVals$TraitDBName)
+colnames(example_input) <- varnames
+example_input <- as.data.frame(example_input)
 
 TA3BUM<-readRDS("TA3BUM.Rda") # binary traits
 TA3OUM<-readRDS("TA3OUM.Rda") # ordinal traits
@@ -39,11 +37,11 @@ ui <-
   
   fluidPage(
     
-    titlePanel("TA3 Age Estimation method - Shiny app replicate"),
+    titlePanel("TA3 Age Estimation method: Shiny app replicate + batch upload"),
     
     # sidebarPanel(width = 7,
     
-    tabsetPanel(
+    tabsetPanel(id="inTabset", 
       
       
       tabPanel("About",
@@ -69,14 +67,17 @@ ui <-
                      age estimates from skeletal indicators with explicit probabilities and intervals', and 
                    therefore is meant to be used in the context of unidentified human remains."),
                
-               p("It has several tabs, each are described below:"),
+               p("This Shiny app adds to the original software the possibility to input data as batches of cases for analysis. 
+                 It has several tabs, each are described below:"),
                
                tags$ul(
-                 tags$li(strong("Case Info:"), "Basic information to identify the case."),
-                 tags$li(strong("Evaluation:"), "Radio buttons to score the 121 skeletal traits that make-up the method and a Reset button to enter a new case."),
-                 tags$li(strong("Current Case Selections:"), "View a summary of the entered information."),
-                 tags$li(strong("Estimate Age:"), "Click on the 'Estimate Age' button and get the results of the Random GLM Analysis for the current case. Use the download button to get a CSV file with the input data and results.")
+                 tags$li(strong("Individual Case:"), "Enter case information and trait scores for an individual case."),
+                 tags$li(strong("Batch Upload:"), "Upload a CSV file with the information of more than one case for batch analysis. Follow the format of the example CSV file provided."),
+                 tags$li(strong("Load case/batch:"), "Load the case or batch information and check the information entered is correct."),
+                 tags$li(strong("Estimate Age:"), "Select what input data you want to analyze and click on the 'Estimate Age' button and get the age estimations from the Random GLM Analysis. Use the download button to get a CSV file with the results.")
                ),
+               
+               p(em("Note: input and processing errors have been detected in the original software and are mimicked in this Shiny app to replicate the same results.")),
                
                br(),
                br(),
@@ -92,25 +93,34 @@ ui <-
       
       
       
-      tabPanel("Case Info", 
-               
-               br(),
-               textInput(inputId = "IDInput", label = "Case ID", value = ""),
-               # numericInput(inputId = "docageInput" , label = "Known age (if available)", value = NA, min = 15, max = 120, step = 1),
-               textInput(inputId = "indDegInput", label = "Individual Designation", value = ""),
-               textInput(inputId = "recorderInput", label = "Recorder", value = ""),
-               textInput(inputId = "obsDateInput", label = "Observation Date", value = ""),
-               textInput(inputId = "noteInput", label = "Notes", value = "")
-               
-               
-      ),
-      
-      
-      tabPanel("Evaluation", 
+      tabPanel("Individual Case", 
                
                
                br(),
+               
+               tabPanel("Reset Evaluation",           
+                        
+                        actionButton("reset_input", "Reset selections")
+                        
+               ),
+               
                navlistPanel(widths = c(2,7),
+                            
+                            
+                            
+                            tabPanel("Case Info",
+                                     
+
+                                     textInput(inputId = "IDInput", label = "Case ID", value = ""),
+                                     # numericInput(inputId = "docageInput" , label = "Known age (if available)", value = NA, min = 15, max = 120, step = 1),
+                                     textInput(inputId = "indDegInput", label = "Individual Designation", value = ""),
+                                     textInput(inputId = "recorderInput", label = "Recorder", value = ""),
+                                     textInput(inputId = "obsDateInput", label = "Observation Date", value = ""),
+                                     textInput(inputId = "noteInput", label = "Notes", value = "")
+                                     
+                                     ),
+                            
+                            
                             tabPanel("Cranium",
                                      
                                      
@@ -207,7 +217,7 @@ ui <-
                                      
                                      hr(),
                                      
-                                     do.call(splitLayout, lapply(22:23, function(i) {
+                                     do.call(splitLayout, lapply(c(22,25), function(i) {
                                        radioButtons(inputId = paste0("radioInput", i), label = traitNamesVals[(paste0(i)),2],
                                                     choiceNames = unname(traitNamesVals[ (paste0(i)) , 3:(traitNamesVals[(paste0(i)),8]) ]),
                                                     choiceValues = names(traitNamesVals[ , 3:(traitNamesVals[(paste0(i)),8]) ]),
@@ -215,7 +225,7 @@ ui <-
                                        )
                                      })),
                                      
-                                     do.call(splitLayout, lapply(24:25, function(i) {
+                                     do.call(splitLayout, lapply(c(23,26), function(i) {
                                        radioButtons(inputId = paste0("radioInput", i), label = traitNamesVals[(paste0(i)),2],
                                                     choiceNames = unname(traitNamesVals[ (paste0(i)) , 3:(traitNamesVals[(paste0(i)),8]) ]),
                                                     choiceValues = names(traitNamesVals[ , 3:(traitNamesVals[(paste0(i)),8]) ]),
@@ -223,7 +233,7 @@ ui <-
                                        )
                                      })),
                                      
-                                     do.call(splitLayout, lapply(26:27, function(i) {
+                                     do.call(splitLayout, lapply(c(24,27), function(i) {
                                        radioButtons(inputId = paste0("radioInput", i), label = traitNamesVals[(paste0(i)),2],
                                                     choiceNames = unname(traitNamesVals[ (paste0(i)) , 3:(traitNamesVals[(paste0(i)),8]) ]),
                                                     choiceValues = names(traitNamesVals[ , 3:(traitNamesVals[(paste0(i)),8]) ]),
@@ -692,33 +702,42 @@ ui <-
                         
                )),
       
-      
-      
-      
-      
-      tabPanel("Current Case Selections", 
+      tabPanel("Batch upload", 
                
                br(),
-               tableOutput("tableSelections")),
+               
+               fileInput("file1", "Choose CSV File",
+                         multiple = FALSE,
+                         accept = c("text/csv",
+                                    "text/comma-separated-values,text/plain",
+                                    ".csv")),
+               hr(),
+               downloadButton("downloadInputFormat", "Download example CSV")
+               
+
+      ),
       
       
-      # tabPanel("Upload Case", 
-      #           fileInput("file1", "Choose CSV File",
-      #                     accept = c(
-      #                       "text/csv",
-      #                       "text/comma-separated-values,text/plain",
-      #                       ".csv")
-      #           )),
+      tabPanel("Load case/batch", 
+               
+               br(),
+               
+               actionButton("loadCase", "Load case data"),
+               actionButton("loadBatch", "Load batch file"),
+               tableOutput("tableSelections"),
+               tableOutput("batchOutput")
+                ),
       
-      
-      
+
       
       tabPanel("Estimate Age",
                br(),
-               actionButton("calculate", "Estimate age"),
-               add_busy_spinner(spin = "fading-circle", position ='bottom-right'),
+               radioButtons("inputChoice", "Type of input", 
+                            choices = c("Individual case", "Batch upload")),
                
-               verbatimTextOutput("allResults"),
+               actionButton("calculate", "Estimate age"),
+               add_busy_spinner(spin = "fading-circle", position ='bottom-left'),
+               tableOutput("allResults"),
                downloadButton("download", "Download results")
                
                
@@ -745,8 +764,7 @@ server <- function(input, output, session) {
   
   
   
-  # fieldsAll <- c("radioInput1", "radioInput2", "radioInput3", "radioInput4", "radioInput5")
-  
+
   observeEvent(input$reset_input, {
     
     
@@ -762,7 +780,13 @@ server <- function(input, output, session) {
   })
   
   
-  data_input <- reactive({ 
+  
+  
+  
+  
+  # LOAD CASE/BATCH - INPUT
+  
+  data_input <- eventReactive(input$loadCase,{ 
     
     fieldsAll <- c("IDInput", "indDegInput", "recorderInput", "obsDateInput", "noteInput", 
                    lapply(1:121, function(i) {
@@ -789,9 +813,30 @@ server <- function(input, output, session) {
   
   
   
+  batch_input <- eventReactive(input$loadBatch,{ 
+
+      
+      inFile  <- input$file1
+      # if (is.null(inFile))
+      #   return(NULL)
+      
+      batch_input <- read.csv(inFile$datapath)
+      batch_input <- as.data.frame(batch_input)
+      
+    })
+    
+
   
   
-  data_output <- reactive({ 
+  
+  
+  
+  # LOAD CASE/BATCH - OUTPUT
+  
+  
+  ## case
+  
+  data_output <- eventReactive(input$loadCase,{ 
     
     fieldsAll <- c("IDInput", "indDegInput", "recorderInput", "obsDateInput", "noteInput",
                    lapply(1:121, function(i) {
@@ -817,8 +862,7 @@ server <- function(input, output, session) {
   })
   
   
-  # output$tableOutput <- renderTable({  data_input()  })
-  
+
   output$tableSelections <- renderTable({  
     
     
@@ -831,6 +875,24 @@ server <- function(input, output, session) {
   
   
   
+  ## batch
+  
+  output$batchOutput <- renderTable({  
+    
+    
+    # data_output() %>% select_if(~ !any(is.na(.)))
+    
+    batch_input() 
+    
+    
+  })
+  
+  
+
+  
+  
+  
+  # ESTIMATE AGE
   
   
   data_results <- eventReactive(input$calculate,{
@@ -838,24 +900,33 @@ server <- function(input, output, session) {
     
     # calculate age
     
+    # ifelse(!is.null(data_input_batch()), 
+    #        data_input <- data_input_batch(),
+    #        data_input <- data_input()
+    #        )
     
-    k = 1
+    ifelse(input$inputChoice == "Individual case",
+           data_input <- data_input(),
+           data_input <- batch_input()
+           )
     
     
-    # separate one case/individual
-    TA3_Input <- data_input()[k,]
+    data_input$cerv_candlewax <- NA #to compensate for TA3 software's error 
+    
     
 
+    data_results <- lapply(1:nrow(data_input), function(k)     
+      
+    {
+      
+      
+    # separate one case/individual
+    TA3_Input_wID <- data_input[k,]
     
-    # #JG store data on ID_catkey and documented age for that case in the "TA3_age_est" matrix
-    # TA3_age_est[k,1] <- TA3_Input$ID_catkey
-    # TA3_age_est[k,2] <- TA3_Input$doc_age
-    # 
-    # 
     
     
     # eliminate doc_age column
-    TA3_Input <-  TA3_Input[,-c(1,5)]
+    TA3_Input <-  TA3_Input_wID[,-c(1,5)]
     
     TA3_Input <- TA3_Input %>%
       mutate(across(everything(), as.numeric))
@@ -1277,57 +1348,75 @@ server <- function(input, output, session) {
     
     
     
+    #JG save results in list
+    
+    data_results <- list()
+    
+    data_results[[k]] <- c(TA3_Input_wID$ID_catkey,
+                           paste(nrow(AnalDat), 'records in reference data.'),
+                           # ncol(AnalCaseB),
+                           paste(round(PredAge,1), "years"),
+                           paste(round(unname(LB),1), "years"),
+                           paste(round(unname(UB),1), "years"),
+                           round(MeanStdError,2),
+                           round(cor(DFP$Age,DFP$PredAge),3))
+      
+      
 
-    data_results <- matrix(NA, ncol=2, nrow=8)
-    varnames <- c("PredAge", "LB", "UB", "ReferenceSampleSize", "warnings",
-                  "total_feat", "MeanStdError", "Corr(Age and Pred Age)")
-    data_results[,1] <- varnames
-    colnames(data_results) <- c("Variable", "Value")
-    
-    data_results[1,2] <- round(PredAge,1)
-    data_results[2,2] <- round(unname(LB),1)
-    data_results[3,2] <- round(unname(UB),1)
-    data_results[4,2] <- paste(nrow(AnalDat), 'records in reference data.')
-    
-    data_results[5,2] <- paste(out[1], out[2], sep = "")
-    data_results[6,2] <- ncol(AnalCaseB)
-    data_results[7,2] <- round(MeanStdError,2)
-    data_results[8,2] <- round(cor(DFP$Age,DFP$PredAge),3)
-    
-    data_results <- as.data.frame(data_results)
     
     
     
+    
+    })
+    
+
+})
+  
+  
+  
+  
+  
+  
+
+  results_bind <- reactive({
+
+
+    
+    # load results list
+    data_results <- data_results()
+    len <- length(data_results)
+
+    # add results to matrix
+    results_bind <- data.frame(matrix(unlist(data_results), nrow=len, byrow=TRUE),stringsAsFactors=FALSE)
+    results_bind <- as.data.frame(results_bind)
+    
+    varnames <- c(  "ID", "RefSample", "PredAge", "LB", "UB", "MeanStdError", "Corr(PredAge,Age)")
+    colnames(results_bind) <- varnames
+    as.data.frame(results_bind)
+
   })
+
+
   
-  
-  
-  
-  
-  
-  
-  observeEvent(input$calculate,{ 
+  observeEvent(input$calculate,{
     
     
     
-    output$allResults <- renderText({  
+    output$allResults <- renderTable({
       
-      data_results <- data_results()
+
       
-      paste(paste("Random GLM Analysis Results"),
-            paste("Reference sample size:", data_results[4,2]),
-            paste("Estimated age at death:", data_results[1,2], "years"),
-            paste("Estimated lower 95% bound:", data_results[2,2], "years"),
-            paste("Estimated upper 95% bound:", data_results[3,2], "years"),
-            paste("Standard Error:", data_results[7,2]),
-            paste("Corr(Age and Pred Age):", data_results[8,2]),
-            paste("Warnings:", data_results[5,2]),
-            # paste(sessionInfo()),
-            sep="\n")  
+      
+      results_bind <- results_bind()
+      
+
       
     })
     
   })
+  
+  
+  
   
   
   
@@ -1339,20 +1428,33 @@ server <- function(input, output, session) {
     },
     content = function(con) {
       
-      data_output <- data_output()
-      data_results <- data_results()
       
-      data_plus_results <- rbind(data_results,data_output)
+      results_bind <- results_bind()
+      
       # data_plus_results <- t(data_plus_results)
       
       
-      write.csv(data_plus_results, con, fileEncoding = "latin1")
+      write.csv(results_bind, con, fileEncoding = "latin1", row.names=FALSE)
     }
   )
   
   
   
-  
+  output$downloadInputFormat <- downloadHandler(
+    filename = function() {
+      "inputFormat.csv"
+    },
+    content = function(con) {
+      
+      
+      example_input 
+      
+      # data_plus_results <- t(data_plus_results)
+      
+      
+      write.csv(example_input, con, fileEncoding = "latin1", row.names=FALSE)
+    }
+  )
   
   
   

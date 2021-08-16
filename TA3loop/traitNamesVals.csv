@@ -21,10 +21,10 @@ S1_margin,S1 margin shape,rnd,shp ,lipped,,19,5
 S12_fusion,S1-S2 fusion,>1cm,<1cm,closed,,20,5
 sacral_elbow,"Sacral ""Elbow""",abs,pres,,,21,4
 cerv_lipping,Cervical vertebral lipping,abs,>3mm,,,22,4
-cerv_candlewax,Cervical candle wax,abs,pres,,,23,4
-thoracic_lipping,Thoracic vertebral lipping,abs,>5mm,,,24,4
-thoracic_candlewax,Thoracic candle wax,abs,pres,,,25,4
-lumbar_lipping,Lumbar Vertebral lipping,abs,>5mm,,,26,4
+thoracic_lipping,Thoracic vertebral lipping,abs,>5mm,,,23,4
+lumbar_lipping,Lumbar Vertebral lipping,abs,>5mm,,,24,4
+cerv_candlewax,Cervical candle wax,abs,pres,,,25,4
+thoracic_candlewax,Thoracic candle wax,abs,pres,,,26,4
 lumbar_candlewax,Lumbar candle wax ,abs,pres,,,27,4
 DISH_C,Cervical DISH,abs,>4verts,,,28,4
 DISH_L,Thoracic DISH,abs,>4verts,,,29,4
