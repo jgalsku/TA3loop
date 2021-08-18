@@ -759,7 +759,6 @@ ui <-
 ######################################################################################
 
 
-# Define server logic required to draw a histogram
 server <- function(input, output, session) {
   
   
@@ -786,6 +785,7 @@ server <- function(input, output, session) {
   
   # LOAD CASE/BATCH - INPUT
   
+  ## case
   data_input <- eventReactive(input$loadCase,{ 
     
     fieldsAll <- c("IDInput", "indDegInput", "recorderInput", "obsDateInput", "noteInput", 
@@ -812,13 +812,13 @@ server <- function(input, output, session) {
   })
   
   
-  
+  ## batch
   batch_input <- eventReactive(input$loadBatch,{ 
 
       
       inFile  <- input$file1
-      # if (is.null(inFile))
-      #   return(NULL)
+      if (is.null(inFile))
+        return("Error: no file found, upload file in 'Batch Upload' tab.")
       
       batch_input <- read.csv(inFile$datapath)
       batch_input <- as.data.frame(batch_input)
@@ -866,8 +866,6 @@ server <- function(input, output, session) {
   output$tableSelections <- renderTable({  
     
     
-    # data_output() %>% select_if(~ !any(is.na(.)))
-    
     data_output() %>% drop_na(Value)
     
     
@@ -879,8 +877,6 @@ server <- function(input, output, session) {
   
   output$batchOutput <- renderTable({  
     
-    
-    # data_output() %>% select_if(~ !any(is.na(.)))
     
     batch_input() 
     
@@ -900,10 +896,7 @@ server <- function(input, output, session) {
     
     # calculate age
     
-    # ifelse(!is.null(data_input_batch()), 
-    #        data_input <- data_input_batch(),
-    #        data_input <- data_input()
-    #        )
+
     
     ifelse(input$inputChoice == "Individual case",
            data_input <- data_input(),
@@ -1076,7 +1069,7 @@ server <- function(input, output, session) {
           AnalCaseB[which(AnalCaseB[colname] == 0), paste(colname, '_0_12', sep = '')] <-  0
           AnalCaseB[which(AnalCaseB[colname] == 0), paste(colname, '_01_2', sep = '')] <-  0
           
-          AnalCaseB[which(AnalCaseB[colname] == 1), paste(colname, '_0_12', sep = '')] <-  0
+          AnalCaseB[which(AnalCaseB[colname] == 1), paste(colname, '_0_12', sep = '')] <-  0 #this is an error from the original code
           AnalCaseB[which(AnalCaseB[colname] == 1), paste(colname, '_01_2', sep = '')] <-  1
           
           AnalCaseB[which(AnalCaseB[colname] == 2), paste(colname, '_0_12', sep = '')] <-  1
@@ -1376,7 +1369,7 @@ server <- function(input, output, session) {
   
   
   
-  
+  # PREP RESULTS 
 
   results_bind <- reactive({
 
@@ -1397,20 +1390,17 @@ server <- function(input, output, session) {
   })
 
 
+  # DISPLAY RESULTS
   
   observeEvent(input$calculate,{
     
-    
-    
+
     output$allResults <- renderTable({
       
 
-      
-      
       results_bind <- results_bind()
       
 
-      
     })
     
   })
@@ -1420,7 +1410,7 @@ server <- function(input, output, session) {
   
   
   
-  
+  # download results
   
   output$download <- downloadHandler(
     filename = function() {
@@ -1431,14 +1421,13 @@ server <- function(input, output, session) {
       
       results_bind <- results_bind()
       
-      # data_plus_results <- t(data_plus_results)
-      
       
       write.csv(results_bind, con, fileEncoding = "latin1", row.names=FALSE)
     }
   )
   
   
+  # download example CSV file
   
   output$downloadInputFormat <- downloadHandler(
     filename = function() {
@@ -1448,8 +1437,6 @@ server <- function(input, output, session) {
       
       
       example_input 
-      
-      # data_plus_results <- t(data_plus_results)
       
       
       write.csv(example_input, con, fileEncoding = "latin1", row.names=FALSE)
